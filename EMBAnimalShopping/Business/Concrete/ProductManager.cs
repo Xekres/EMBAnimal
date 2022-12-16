@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Results.SuccessOrErrorDataResults;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Concrete.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +48,21 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.CategoryId == categoryId).ToList());   
         }
 
+        public IDataResult<ProductDetailDto> GetProductDetails(int productId)
+        {
+            return new SuccessDataResult<ProductDetailDto>(_productDal.GetProductDetails(productId));
+        }
+
+        public IDataResult<List<ProductDetailDto>> GetProductDetails()
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
+        }
+
         public IResult Update(Product product)
         {
             _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
         }
+        
     }
 }

@@ -11,6 +11,11 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).Conf
 {
     builder.RegisterModule(new AutofacBusinessModule());
 });
+//Adding Cors Policy For Angular.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder => builder.WithOrigins("http://localhost:4200"));
+});
 // Add services to the container.
 
 var tokenOptions = builder.Configuration.GetSection(key: "TokenOptions").Get<TokenOptions>();
@@ -45,7 +50,10 @@ if (app.Environment.IsDevelopment())
 }
 // Configure the HTTP request pipeline.
 
-
+app.UseCors(builder =>
+{
+    builder.WithOrigins("http://localhost:4200").AllowAnyHeader();
+});
 app.UseHttpsRedirection();
 
 

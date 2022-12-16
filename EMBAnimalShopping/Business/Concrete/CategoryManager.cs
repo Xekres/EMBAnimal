@@ -27,9 +27,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CategoryAdded);
         }
 
-        public IResult Delete(Category category)
+        public IResult Delete(int categoryId)
         {
-            _categoryDal.Delete(category);
+            _categoryDal.Delete(new Category { Id = categoryId });
             return new SuccessResult(Messages.CategoryDeleted);
         }
 
@@ -44,9 +44,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Category>>(_categoryDal.GetList().ToList());
         }
 
-        public IResult Update(Category category)
+        public IResult Update(int categoryId)
         {
-            _categoryDal.Update(category);
+            _categoryDal.Update(new Category { Id = categoryId });
             return new SuccessResult(Messages.CategoryUpdated);
         }
     }

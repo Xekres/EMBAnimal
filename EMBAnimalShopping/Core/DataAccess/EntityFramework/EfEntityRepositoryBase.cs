@@ -42,7 +42,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public IList<TEntity> GetList(Expression<Func<TEntity, bool>>? filter = null)
         {
             using (var context= new TContext())
             {
@@ -60,6 +60,18 @@ namespace Core.DataAccess.EntityFramework
                 updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
             }
+        }
+
+        //deneme
+        public void Create(TEntity entity)
+        {
+            using (var context=new TContext())
+            {
+                var createdEntity = context.Add(entity);
+                context.SaveChanges();
+                
+            }
+                
         }
     }
 }

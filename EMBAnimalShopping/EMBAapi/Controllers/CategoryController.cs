@@ -48,9 +48,9 @@ namespace EMBAapi.Controllers
             return BadRequest(result.Message);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(Category category)
+        public IActionResult Delete(int categoryId)
         {
-            var result = _categoryService.Delete(category);
+            var result = _categoryService.Delete(categoryId);
             if (result.Success)
             {
                 return Ok(result.Message);
@@ -58,9 +58,9 @@ namespace EMBAapi.Controllers
             return BadRequest(result.Message);
         }
         [HttpPost("update")]
-        public IActionResult Update(Category category)
+        public IActionResult Update(int categoryId)
         {
-            var result=_categoryService.Update(category);
+            var result=_categoryService.Update(categoryId);
             if (result.Success)
             {
                 return Ok(result.Message);

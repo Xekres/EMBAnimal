@@ -13,10 +13,10 @@ namespace EMBAapi.Controllers
         private IProductService _productService;
         public ProductsController(IProductService productService)
         {
-            _productService = productService;   
+            _productService = productService;
         }
         [HttpGet("getall")]
-        [Authorize(Roles ="Product.List")]
+        //[Authorize(Roles ="Product.List")]
         public IActionResult GetList()
         {
             var result = _productService.GetList();
@@ -41,12 +41,12 @@ namespace EMBAapi.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int productId)
         {
-            var result=_productService.GetById(productId);
+            var result = _productService.GetById(productId);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
 
@@ -79,6 +79,28 @@ namespace EMBAapi.Controllers
                 return Ok(result.Message);
             }
             return BadRequest(result.Message);
+        }
+        [HttpGet("getproductdetails")]
+        public IActionResult GetProductDetails()
+        {
+            var result = _productService.GetProductDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getdetailbyid")]
+        public IActionResult GetProductDetails(int productId)
+        {
+            //Thread.Sleep(2000);
+            var result = _productService.GetProductDetails(productId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
